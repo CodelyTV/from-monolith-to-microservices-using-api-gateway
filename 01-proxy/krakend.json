@@ -1,0 +1,46 @@
+{
+	"version": 2,
+	"timeout": "3000ms",
+	"cache_ttl": "300s",
+	"host": [
+		"http://monolith:8081"
+	  ],
+	"endpoints": [
+	  {
+		"endpoint": "/authors",
+
+		"output_encoding": "no-op",
+		"backend": [
+		  {
+			"url_pattern": "/authors",
+			"encoding": "no-op"
+		  }
+		]
+	  },
+	  {
+		"endpoint": "/courses",
+
+		"output_encoding": "no-op",
+		"backend": [
+		  {
+			"url_pattern": "/courses",
+			"encoding": "no-op"
+		  }
+		]
+	  },
+	  {
+		"endpoint": "/paths",
+
+		"output_encoding": "no-op",
+		"querystring_params": [
+		  "course_id"
+		],
+		"backend": [
+		  {
+			"url_pattern": "/paths",
+			"encoding": "no-op"
+		  }
+		]
+	  }
+	]
+  }
