@@ -2,21 +2,25 @@
 
 require __DIR__ . '/utils.php';
 
+require __DIR__ . '/auth/AuthHelper.php';
+require __DIR__ . '/auth/SessionAuth.php';
+
 require __DIR__ . '/controller/Controller.php';
 require __DIR__ . '/controller/AuthorsGetController.php';
 require __DIR__ . '/controller/CoursesGetController.php';
 require __DIR__ . '/controller/PathsGetController.php';
 require __DIR__ . '/controller/LoginPostController.php';
+require __DIR__ . '/controller/LogoutController.php';
 
 require __DIR__ . '/middleware/AuthMiddleware.php';
 
-$url      = $_SERVER['PATH_INFO'];
+$url      = strtok($_SERVER['REQUEST_URI'], '?');
 $response = '';
 
 if ($_POST) {
     switch ($url) {
         case '/login':
-            $response = (new LoginPostController())->handle($_REQUEST);
+            $response = (new LoginPostController(new SessionAuth($usersPass)))->handle($_REQUEST);
             break;
         default:
             $response = "The POST `$url` doesn't exist!";
@@ -27,19 +31,22 @@ if ($_POST) {
         case '/':
             break;
         case '/authors':
-            $response = (new AuthMiddleware(new AuthorsGetController()))->handle($_REQUEST);
+            $response = (new AuthMiddleware(new AuthorsGetController(), new SessionAuth($usersPass)))->handle($_REQUEST);
 
             break;
         case '/courses':
-            $response = (new AuthMiddleware(new CoursesGetController()))->handle($_REQUEST);
+            $response = (new AuthMiddleware(new CoursesGetController(), new SessionAuth($usersPass)))->handle($_REQUEST);
 
             break;
         case '/paths':
-            $response = (new AuthMiddleware(new PathsGetController()))->handle($_REQUEST);
+            $response = (new AuthMiddleware(new PathsGetController(), new SessionAuth($usersPass)))->handle($_REQUEST);
 
             break;
         case '/login':
-            $response = (new LoginPostController())->handle($_REQUEST);
+            $response = (new LoginPostController(new SessionAuth($usersPass)))->handle($_REQUEST);
+            break;
+        case '/logout':
+            $response = (new LogoutController(new SessionAuth($usersPass)))->handle($_REQUEST);
             break;
         default:
             $response = "The GET `$url` doesn't exist!";

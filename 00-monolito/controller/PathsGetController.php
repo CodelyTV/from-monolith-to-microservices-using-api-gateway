@@ -78,11 +78,11 @@ final class PathsGetController extends Controller
     public function handle(array $request): string
     {
         if (!isset($request['course_id'])) {
-            throw new RuntimeException('You need to pass the course_id');
+            return $this->jsonResponse(self::PATHS);
         }
 
         if (!isset(self::PATHS[$request['course_id']])) {
-            throw new RuntimeException("The course <${request['course_id']}> does't exist");
+            return $this->jsonResponse([]);
         }
 
         return $this->jsonResponse(self::PATHS[$request['course_id']]);
