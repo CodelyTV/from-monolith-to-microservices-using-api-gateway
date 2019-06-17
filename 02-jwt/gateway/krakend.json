@@ -1,0 +1,110 @@
+{
+	"version": 2,
+	"timeout": "3000ms",
+	"port": 8080,
+	"cache_ttl": "300s",
+	"host": [
+		"http://monolith:8081"
+	  ],
+	"endpoints": [
+	  {
+		"endpoint": "/authors",
+		"headers_to_pass": ["*"],
+		"output_encoding": "no-op",
+		"backend": [
+		  {
+			"url_pattern": "/authors",
+			"encoding": "no-op"
+		  }
+		],
+		"extra_config": {
+          "github.com/devopsfaith/krakend-jose/validator": {
+            "alg": "HS256",
+            "audience": ["http://api.company.com"],
+            "roles_key": "roles",
+            "issuer": "http://monoli.th",
+            "roles": ["user", "admin"],
+            "jwk-url": "http://monolith:8081/jwk",
+            "disable_jwk_security": true
+          }
+        }
+	  },
+	  {
+		"endpoint": "/courses",
+		"headers_to_pass": ["*"],
+		"output_encoding": "no-op",
+		"backend": [
+		  {
+			"url_pattern": "/courses",
+			"encoding": "no-op"
+		  }
+		],
+		"extra_config": {
+          "github.com/devopsfaith/krakend-jose/validator": {
+            "alg": "HS256",
+            "audience": ["http://api.company.com"],
+            "roles_key": "roles",
+            "issuer": "http://monoli.th",
+            "roles": ["user", "admin"],
+            "jwk-url": "http://monolith:8081/jwk",
+            "disable_jwk_security": true
+          }
+        }
+	  },
+	  {
+		"endpoint": "/paths",
+		"headers_to_pass": ["*"],
+		"output_encoding": "no-op",
+		"querystring_params": [
+		  "course_id"
+		],
+		"backend": [
+		  {
+			"url_pattern": "/paths",
+			"encoding": "no-op"
+		  }
+		],
+		"extra_config": {
+          "github.com/devopsfaith/krakend-jose/validator": {
+            "alg": "HS256",
+            "audience": ["http://api.company.com"],
+            "roles_key": "roles",
+            "issuer": "http://monoli.th",
+            "roles": ["user", "admin"],
+            "jwk-url": "http://monolith:8081/jwk",
+            "disable_jwk_security": true
+          }
+        }
+	  },
+	  {
+		"endpoint": "/login",
+		"method": "POST",
+		"headers_to_pass": ["*"],
+		"backend": [
+		  {
+			"url_pattern": "/login"
+		  }
+		],
+		"extra_config": {
+          "github.com/devopsfaith/krakend-jose/signer": {
+            "alg": "HS256",
+            "kid": "sim2",
+            "keys-to-sign": ["access_token"],
+            "jwk-url": "http://monolith:8081/jwk",
+            "disable_jwk_security": true
+          }
+        }
+	  },
+	  {
+		"endpoint": "/logout",
+		"headers_to_pass": ["*"],
+		"output_encoding": "no-op",
+		"backend": [
+		  {
+			"url_pattern": "/logout",
+			"encoding": "no-op"
+		  }
+		]
+	  }
+	]
+  }
