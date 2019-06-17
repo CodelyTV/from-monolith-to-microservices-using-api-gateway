@@ -1,6 +1,7 @@
 {
 	"version": 2,
 	"timeout": "3000ms",
+	"port": 8080,
 	"cache_ttl": "300s",
 	"host": [
 		"http://monolith:8081"
@@ -8,7 +9,7 @@
 	"endpoints": [
 	  {
 		"endpoint": "/authors",
-
+		"headers_to_pass": ["*"],
 		"output_encoding": "no-op",
 		"backend": [
 		  {
@@ -19,7 +20,7 @@
 	  },
 	  {
 		"endpoint": "/courses",
-
+		"headers_to_pass": ["*"],
 		"output_encoding": "no-op",
 		"backend": [
 		  {
@@ -30,7 +31,7 @@
 	  },
 	  {
 		"endpoint": "/paths",
-
+		"headers_to_pass": ["*"],
 		"output_encoding": "no-op",
 		"querystring_params": [
 		  "course_id"
@@ -38,6 +39,29 @@
 		"backend": [
 		  {
 			"url_pattern": "/paths",
+			"encoding": "no-op"
+		  }
+		]
+	  },
+	  {
+		"endpoint": "/login",
+		"method": "POST",
+		"headers_to_pass": ["*"],
+		"output_encoding": "no-op",
+		"backend": [
+		  {
+			"url_pattern": "/login",
+			"encoding": "no-op"
+		  }
+		]
+	  },
+	  {
+		"endpoint": "/logout",
+		"headers_to_pass": ["*"],
+		"output_encoding": "no-op",
+		"backend": [
+		  {
+			"url_pattern": "/logout",
 			"encoding": "no-op"
 		  }
 		]
