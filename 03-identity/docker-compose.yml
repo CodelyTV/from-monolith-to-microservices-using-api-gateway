@@ -1,0 +1,22 @@
+version: "3"
+services:
+  monolith:
+    image: php:7
+    command: ["php", "-S", "0.0.0.0:8081", "/app/index.php"]
+    ports:
+      - 8081:8081
+    volumes:
+      - ./monolito/:/app
+  identity:
+    image: php:7
+    command: ["php", "-S", "0.0.0.0:8082", "/app/index.php"]
+    ports:
+      - 8082:8082
+    volumes:
+      - ./identity/:/app
+  krakend:
+    image: devopsfaith/krakend
+    volumes:
+      - ./gateway:/etc/krakend
+    ports:
+      - 8080:8080
