@@ -11,6 +11,7 @@ require __DIR__ . '/controller/CoursesGetController.php';
 require __DIR__ . '/controller/PathsGetController.php';
 require __DIR__ . '/controller/LoginPostController.php';
 require __DIR__ . '/controller/LogoutController.php';
+require __DIR__ . '/controller/JWKController.php';
 
 require __DIR__ . '/middleware/AuthMiddleware.php';
 
@@ -44,9 +45,15 @@ if ($_POST) {
             break;
         case '/login':
             $response = (new LoginPostController(new SessionAuth($usersPass)))->handle($_REQUEST);
+
             break;
         case '/logout':
             $response = (new LogoutController(new SessionAuth($usersPass)))->handle($_REQUEST);
+
+            break;
+        case '/jwk':
+            $response = (new JWKController())->handle($_REQUEST);
+
             break;
         default:
             $response = "The GET `$url` doesn't exist!";

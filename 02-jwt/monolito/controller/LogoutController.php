@@ -2,14 +2,12 @@
 
 declare(strict_types = 1);
 
-final class AuthMiddleware
+final class LogoutController extends Controller
 {
-    private $controller;
     private $helper;
 
-    public function __construct(Controller $controller, AuthHelper $helper)
+    public function __construct(AuthHelper $helper)
     {
-        $this->controller = $controller;
         $this->helper = $helper;
     }
 
@@ -17,10 +15,12 @@ final class AuthMiddleware
     {
         if (!$this->helper->isLogged()) {
             header('HTTP/1.0 401 Unauthorized');
-            echo 'Unauthorized!!!';
+            echo 'Invalid credentials!';
             exit;
         }
 
-        return $this->controller->handle($request);
+        $this->helper->logout();
+
+        return 'Bye!';
     }
 }
