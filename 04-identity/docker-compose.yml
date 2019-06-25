@@ -6,7 +6,14 @@ services:
     ports:
       - 8081:8081
     volumes:
-      - ./monolito/:/app
+      - ./01-monolith/:/app
+  identity:
+    image: php:7
+    command: ["php", "-S", "0.0.0.0:8082", "/app/index.php"]
+    ports:
+      - 8082:8082
+    volumes:
+      - ./identity/:/app
   krakend:
     image: devopsfaith/krakend
     volumes:

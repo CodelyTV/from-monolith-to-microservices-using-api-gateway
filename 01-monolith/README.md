@@ -12,7 +12,7 @@
 ## 🤹‍♂️ Available endpoints
 
 * See [`example-curls.sh`](example-curls.sh) for specific `curl` calls.
-* `POST /login`: HTTP login. Valid combinations [here](utils.php). 
+* `POST /login`: HTTP login. Valid combinations [here](utils.php).
 * `GET /courses?course_id=77070`: All the information regarding the `77070` course including its path, authors, and more. Response example:
 ```json
 {
