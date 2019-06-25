@@ -6,9 +6,7 @@ require __DIR__ . '/auth/AuthHelper.php';
 require __DIR__ . '/auth/SessionAuth.php';
 
 require __DIR__ . '/controller/Controller.php';
-require __DIR__ . '/controller/AuthorsGetController.php';
 require __DIR__ . '/controller/CoursesGetController.php';
-require __DIR__ . '/controller/PathsGetController.php';
 require __DIR__ . '/controller/LoginPostController.php';
 require __DIR__ . '/controller/LogoutController.php';
 
@@ -30,16 +28,8 @@ if ($_POST) {
     switch ($url) {
         case '/':
             break;
-        case '/authors':
-            $response = (new AuthMiddleware(new AuthorsGetController(), new SessionAuth($usersPass)))->handle($_REQUEST);
-
-            break;
         case '/courses':
             $response = (new AuthMiddleware(new CoursesGetController(), new SessionAuth($usersPass)))->handle($_REQUEST);
-
-            break;
-        case '/paths':
-            $response = (new AuthMiddleware(new PathsGetController(), new SessionAuth($usersPass)))->handle($_REQUEST);
 
             break;
         case '/login':
