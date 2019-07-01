@@ -8,6 +8,7 @@ require __DIR__ . '/controller/AuthorsGetController.php';
 require __DIR__ . '/controller/CoursesGetController.php';
 require __DIR__ . '/controller/PathsGetController.php';
 require __DIR__ . '/controller/RelatedCoursesGetController.php';
+require __DIR__ . '/controller/PricingPlanGetController.php';
 
 require __DIR__ . '/middleware/AuthMiddleware.php';
 
@@ -36,6 +37,10 @@ if ($_POST) {
             break;
         case 'related-courses':
             $response = (new AuthMiddleware(new RelatedCoursesGetController(), new SessionAuth()))->handle($request);
+
+            break;
+        case 'pricing-plan':
+            $response = (new AuthMiddleware(new PricingPlanGetController(), new SessionAuth()))->handle($request);
 
             break;
         default:
