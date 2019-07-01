@@ -11,24 +11,26 @@ require __DIR__ . '/controller/PathsGetController.php';
 require __DIR__ . '/middleware/AuthMiddleware.php';
 
 $url      = strtok($_SERVER['REQUEST_URI'], '?');
+$urlPath  = explode('/', $url)[1];
 $response = '';
+$request  = array_merge($_REQUEST, ['REQUEST_URL' => $url, 'REQUEST_URL_PATH' => $urlPath]);
 
 if ($_POST) {
     $response = "The POST `$url` doesn't exist!";
 } else {
-    switch ($url) {
-        case '/':
+    switch ($urlPath) {
+        case '':
             break;
-        case '/authors':
-            $response = (new AuthMiddleware(new AuthorsGetController(), new SessionAuth()))->handle($_REQUEST);
+        case 'authors':
+            $response = (new AuthMiddleware(new AuthorsGetController(), new SessionAuth()))->handle($request);
 
             break;
-        case '/courses':
-            $response = (new AuthMiddleware(new CoursesGetController(), new SessionAuth()))->handle($_REQUEST);
+        case 'courses':
+            $response = (new AuthMiddleware(new CoursesGetController(), new SessionAuth()))->handle($request);
 
             break;
-        case '/paths':
-            $response = (new AuthMiddleware(new PathsGetController(), new SessionAuth()))->handle($_REQUEST);
+        case 'paths':
+            $response = (new AuthMiddleware(new PathsGetController(), new SessionAuth()))->handle($request);
 
             break;
         default:
