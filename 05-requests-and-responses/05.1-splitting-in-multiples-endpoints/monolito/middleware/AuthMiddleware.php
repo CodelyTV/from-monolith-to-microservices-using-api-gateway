@@ -15,11 +15,11 @@ final class AuthMiddleware
 
     public function handle(array $request): string
     {
-        //        if (!$this->helper->isLogged()) {
-        //            header('HTTP/1.0 401 Unauthorized');
-        //            echo 'Unauthorized!!!';
-        //            exit;
-        //        }
+        if (!$this->helper->isLogged()) {
+            header('HTTP/1.0 401 Unauthorized');
+            echo 'Unauthorized!!!';
+            exit;
+        }
 
         return $this->controller->handle($request);
     }
