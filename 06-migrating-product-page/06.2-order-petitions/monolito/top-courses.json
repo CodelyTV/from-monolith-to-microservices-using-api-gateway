@@ -7,7 +7,8 @@
     "authors": [
       "b4b9ee99-8290-4064-8e3c-e4fd925fe0b9",
       "39402ea6-d5a0-4466-918d-e5eef75cc8a9"
-    ]
+    ],
+    "price_plan_id": "4c5be45d-799b-49c5-93bc-859a832a2a65"
   },
   {
     "id": "66748",
@@ -17,6 +18,7 @@
     "authors": [
       "b4b9ee99-8290-4064-8e3c-e4fd925fe0b9",
       "39402ea6-d5a0-4466-918d-e5eef75cc8a9"
-    ]
+    ],
+    "price_plan_id": "4c5be45d-799b-49c5-93bc-859a832a2a65"
   }
 ]
