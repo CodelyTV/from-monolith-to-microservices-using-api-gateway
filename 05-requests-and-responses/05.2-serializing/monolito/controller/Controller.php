@@ -13,6 +13,13 @@ abstract class Controller
         return json_encode($response);
     }
 
+    protected function xmlResponse(array $response): string
+    {
+        header('Content-Type: text/xml');
+
+        return xmlrpc_encode($response);
+    }
+
     protected function notFoundResponse(string $message): string
     {
         header('HTTP/1.0 404 Not Found');
