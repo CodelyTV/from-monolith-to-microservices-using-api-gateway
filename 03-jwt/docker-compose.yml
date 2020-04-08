@@ -3,10 +3,8 @@ services:
   monolith:
     image: php:7
     command: ["php", "-S", "0.0.0.0:8081", "/app/index.php"]
-    ports:
-      - 8081:8081
     volumes:
-      - ./01-monolith/:/app
+      - ./monolito/:/app
   krakend:
     image: devopsfaith/krakend
     volumes:
